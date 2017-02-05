@@ -1,9 +1,9 @@
 defmodule StringMath do
   def parse(string) do
     string
-     |> Enum.reject(&(&1 == ?\s || &1 == ?\w))
-     |> _parse([], 0)
-     |> _calculate
+    |> Enum.reject(&(&1 == ?\s || &1 == ?\w))
+    |> _parse([], 0)
+    |> _calculate
   end
 
   defp _parse([], stack, value),
