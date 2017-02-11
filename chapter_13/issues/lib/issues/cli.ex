@@ -48,6 +48,7 @@ defmodule Issues.CLI do
     |> convert_to_list_maps
     |> sort_into_ascending_order
     |> Enum.take(count)
+    |> print_table_to_terminal
   end
 
   def decode_response({:ok, body}), do: body
@@ -65,6 +66,14 @@ defmodule Issues.CLI do
 
   def sort_into_ascending_order(list_of_issues) do
     Enum.sort(list_of_issues,
-              fn (i1, i2) -> i1["created_at"] <= i2["created_at"] end)
+              fn(i1, i2) -> i1["created_at"] <= i2["created_at"] end)
+  end
+
+  def print_table_to_terminal(issues) do
+    IO.puts " created_at           | #    | title                  "
+    IO.puts "----------------------+------+------------------------"
+    Enum.map(issues, fn(x) ->
+              IO.puts " #{x["created_at"]} | #{x["number"]} | #{x["title"]}"
+            end)
   end
 end
