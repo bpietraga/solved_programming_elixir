@@ -3,6 +3,7 @@
 use Mix.Config
 config :issues, github_url: "https://api.github.com"
 config :issues, user_agent: [{"User-agent", "Elixir bernard.pietraga@gmail.com"}]
+config :logger, compile_time_purge: :info
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
