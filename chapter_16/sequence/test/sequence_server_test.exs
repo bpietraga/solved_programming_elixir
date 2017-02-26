@@ -1,6 +1,15 @@
 defmodule SequenceServerTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Sequence
+
+  test "start and exit server start a server" do
+    {status, _pid} = Sequence.Server.start_link([])
+    expected_start = status
+    assert expected_start == :ok
+
+    expected_exit = Sequence.Server.exit
+    assert expected_exit == :ok
+  end
 
   test "pop removes first element (not like normal pop)" do
     {:ok, pid} = GenServer.start_link(Sequence.Server, [5, "cat", 9])
