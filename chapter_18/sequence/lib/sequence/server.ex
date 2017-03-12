@@ -7,8 +7,10 @@ defmodule Sequence.Server do
   def start_link(stash_pid), do:
     GenServer.start_link(__MODULE__, stash_pid, name: __MODULE__)
 
-  def next_number, do:
-    GenServer.call __MODULE__, :next_number
+  def next_number do
+    with number = GenServer.call(__MODULE__, :next_number),
+    do: "The next number is #{number}"
+  end
 
   def increment_number(delta), do:
     GenServer.cast __MODULE__, {:increment_number, delta}
