@@ -3,7 +3,7 @@ defmodule Sequence.Mixfile do
 
   def project do
     [app: :sequence,
-     version: "0.0.2",
+     version: "0.0.3",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
