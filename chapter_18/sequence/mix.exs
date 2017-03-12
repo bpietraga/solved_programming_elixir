@@ -3,7 +3,7 @@ defmodule Sequence.Mixfile do
 
   def project do
     [app: :sequence,
-     version: "0.1.0",
+     version: "0.0.1",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -32,6 +32,8 @@ defmodule Sequence.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:exrm, "~> 1.0.0-rc7"}
+    ]
   end
 end
