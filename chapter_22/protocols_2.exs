@@ -39,11 +39,11 @@ defmodule CaesarMacChecker do
     inspect_words(mac_words, sorted_words(mac_words))
   end
 
-  def inspect_words(mac_words, words_by_size) do
+  defp inspect_words(mac_words, words_by_size) do
     Enum.each(mac_words, &match_word(&1, words_by_size))
   end
 
-  def match_word(word, words_by_size) do
+  defp match_word(word, words_by_size) do
     encrypted = CaesarSalad.rot13(word)
     case MapSet.member?(words_by_size[byte_size(word)], encrypted) do
       true ->
@@ -53,12 +53,12 @@ defmodule CaesarMacChecker do
     end
   end
 
-  def macintosh_dictionary do
+  defp macintosh_dictionary do
     File.stream!("/usr/share/dict/words", [:read, :utf8], :line)
     |> Enum.map(&String.rstrip(&1) |> String.downcase)
   end
 
-  def sorted_words(words) do
+  defp sorted_words(words) do
     for {length, word_group} <- Enum.group_by(words, &byte_size/1), into: Map.new do
       {length, Enum.into(word_group, MapSet.new)}
     end
